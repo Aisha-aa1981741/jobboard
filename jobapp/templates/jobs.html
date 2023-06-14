@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-4">
+  <h2 class="text-3xl font-bold mb-4 bg-slate-900 p-4 text-white rounded-md">Welcome to Job Board! Find Jobs with ease</h2>
+<hr class="h-6">
+  {% if job %} 
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+    {% for job_item in job %}
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <img class="w-full h-40 object-cover" src="{{ job_item.image.url }}" alt="Job Image">
+      <div class="p-4">
+        <h3 class="text-xl font-semibold mb-2">{{ job_item.job_title }}</h3>
+        <p class="text-gray-700 font-medium mb-2">{{ job_item.company_name }}</p>
+        <p class="text-gray-500 mb-4">{{ job_item.location }}</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{ job_item.get_position_display }}</span>
+        </div>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="{% url 'jobdetail' job_item.id %}" class="block text-center bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 px-4 rounded-full" >
+          View Details
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center">No jobs to show</p>
+  {% endif %}
+</div>
+<br>
+{% endblock content %}

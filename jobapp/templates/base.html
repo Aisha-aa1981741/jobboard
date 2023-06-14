@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+      *{
+        font-family: 'Work Sans', sans-serif;
+      }
+    </style>
+</head>
+<body>
+  <nav class="bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-white font-semibold text-xl">Job Board</a>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-4 flex items-center">
+                    <a href="/" class="ml-4 text-white hover:text-gray-300">Jobs</a>
+                    <a href="/postjob" class="ml-4 text-white hover:text-gray-300">Post a Job</a>
+                    {% if user.is_authenticated %}
+                    <div class="ml-4">
+                        <form action="logout/" method="POST" class="inline-block">
+                            {% csrf_token %}
+                            <button type="submit" class="text-white hover:text-gray-300">Logout</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <a href="/register" class="ml-4 text-white hover:text-gray-300">Register</a>
+                    <a href="/login" class="ml-4 text-white hover:text-gray-300">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+ {% block content %}{% endblock content %}
+    
+    <footer class="py-6 text-white text-center bg-gray-800">Made with Love by <b>Muhammad Ahmad</b></footer>
+</body>
+</html>
